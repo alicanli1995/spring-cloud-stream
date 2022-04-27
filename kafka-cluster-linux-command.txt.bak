@@ -1,0 +1,10 @@
+confluent local service start
+export CONFLUENT_HOME=/home/alicanli1995/confluent-7.1.0
+export PATH=/mnt/c/confluent-7.1.0/bin:$PATH
+kafka-console-producer --topic test-topic --broker-list localhost:9092
+kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092 --from-beginning
+confluent local destroy 
+
+-> Proxy redirect : 
+ifconfig -> get ip addres and set proxy
+netsh interface portproxy add v4tov4 listenport=9092 listenaddress=0.0.0.0 connectport:9092 connectaddress=172.24.207.207

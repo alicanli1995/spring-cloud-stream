@@ -3,7 +3,7 @@ spring:
     stream:
       bindings:
         input-channel-1:
-          destination: users
+          destination: pos-topic
       kafka:
         streams:
           binder:
