@@ -41,7 +41,7 @@ services:
 
 
   schemaregistry:
-    image: confluentinc/cp-schema-registry:6.2.0
+    image: confluentinc/cp-schema-registry:6.0.0
     restart: always
     networks:
       - microservice-net

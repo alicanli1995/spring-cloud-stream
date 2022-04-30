@@ -3,7 +3,7 @@ spring:
     stream:
       bindings:
         input-channel-1:
-          destination: loyalty-topic
+          destination: avro-pos-topic
       kafka:
         streams:
           binder:
