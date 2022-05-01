@@ -1,9 +1,5 @@
 package com.example.avroposgenerator.services;
 
-import com.example.avroposgenerator.model.DeliveryAddress;
-import com.example.avroposgenerator.model.LineItem;
-import com.example.avroposgenerator.model.PosInvoice;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +16,7 @@ public class InvoiceGeneratorService {
     private final Random invoiceIndex;
     private final Random invoiceNumber;
     private final Random numberOfItems;
-    private final PosInvoice[] invoices;
+    private final com.example.avroposgenerator.model.PosInvoice[] invoices;
     @Autowired
     AddressGeneratorService addressGenerator;
     @Autowired
@@ -34,7 +30,7 @@ public class InvoiceGeneratorService {
         ObjectMapper mapper;
         mapper = new ObjectMapper();
         try {
-            invoices = mapper.readValue(new File(DATAFILE), PosInvoice[].class);
+            invoices = mapper.readValue(new File(DATAFILE), com.example.avroposgenerator.model.PosInvoice[].class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -52,19 +48,19 @@ public class InvoiceGeneratorService {
         return numberOfItems.nextInt(4) + 1;
     }
 
-    public PosInvoice getNextInvoice() {
-        PosInvoice invoice = invoices[getIndex()];
+    public com.example.avroposgenerator.model.PosInvoice getNextInvoice() {
+        com.example.avroposgenerator.model.PosInvoice invoice = invoices[getIndex()];
         invoice.setInvoiceNumber(Integer.toString(getNewInvoiceNumber()));
         invoice.setCreatedTime(System.currentTimeMillis());
         if ("HOME-DELIVERY".equalsIgnoreCase(invoice.getDeliveryType())) {
-            DeliveryAddress deliveryAddress = addressGenerator.getNextAddress();
+            com.example.avroposgenerator.model.DeliveryAddress deliveryAddress = addressGenerator.getNextAddress();
             invoice.setDeliveryAddress(deliveryAddress);
         }
         int itemCount = getNoOfItems();
         double totalAmount = 0.0;
-        List<LineItem> items = new ArrayList<>();
+        List<com.example.avroposgenerator.model.LineItem> items = new ArrayList<>();
         for (int i = 0; i < itemCount; i++) {
-            LineItem item = productGenerator.getNextProduct();
+            com.example.avroposgenerator.model.LineItem item = productGenerator.getNextProduct();
             totalAmount = totalAmount + item.getTotalValue();
             items.add(item);
         }

@@ -10,4 +10,4 @@ spring:
 
 application:
   configs:
-    topic.name: pos-topic
+    topic.name: avro-pos-topic

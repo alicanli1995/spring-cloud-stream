@@ -1,6 +1,5 @@
 package com.example.avroposgenerator.services;
 
-import com.example.avroposgenerator.model.DeliveryAddress;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import java.util.Random;
 @Service
 public class AddressGeneratorService {
     private final Random random;
-    private final DeliveryAddress[] addresses;
+    private final com.example.avroposgenerator.model.DeliveryAddress[] addresses;
 
     public AddressGeneratorService(){
         final String DATAFILE = "src/main/resources/data/Address.json";
@@ -20,7 +19,7 @@ public class AddressGeneratorService {
         objectMapper = new ObjectMapper();
 
         try {
-            addresses = objectMapper.readValue(new File(DATAFILE) , DeliveryAddress[].class);
+            addresses = objectMapper.readValue(new File(DATAFILE) , com.example.avroposgenerator.model.DeliveryAddress[].class);
         }catch (Exception exception){
             throw new RuntimeException(exception);
         }
@@ -29,7 +28,7 @@ public class AddressGeneratorService {
     private int getIndex(){
         return random.nextInt(100);
     }
-    public DeliveryAddress getNextAddress(){
+    public com.example.avroposgenerator.model.DeliveryAddress getNextAddress(){
         return addresses[getIndex()];
     }
 

@@ -18,9 +18,11 @@ public class AvroPosGeneratorApplication {
     public static void main(String[] args) {
         SpringApplication.run(AvroPosGeneratorApplication.class, args);
     }
-    @Scheduled(fixedRate = 2_000)
+    @Scheduled(fixedRate = 4_000)
     public void sendMessage(){
         var invoicePos = invoiceGeneratorService.getNextInvoice();
         kafkaProducerService.sendMessage(invoicePos);
     }
+
+
 }
