@@ -12,3 +12,5 @@ netsh interface portproxy add v4tov4 listenport=9092 listenaddress=0.0.0.0 conne
 -> Create topics :
 kafka-topics --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic users
 
+
+-> Consumer :
