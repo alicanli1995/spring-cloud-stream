@@ -15,3 +15,7 @@ kafka-topics --create --bootstrap-server localhost:9092 --replication-factor 1 -
 
 -> Consumer :
 kafka-console-consumer --topic test-topic --bootstrap-server localhost:9092 --from-beginning
+
+-> Producer :
+kafka-console-producer --topic test-topic --broker-list localhost:9092
+
